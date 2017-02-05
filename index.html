@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>VR2C</title>
+    <meta name="description" content="Virtual Reality to Consumers">
+    <script src="components/aframe.min.js"></script>
+    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
+    <script src="components/set-image.js"></script>
+  </head>
+  <body>
+    <a-scene inspector="url: components/aframe-inspector.min.js">
+      <a-assets>
+      <!-- Products-->
+        <img id="room" src="img/room.png">
+        <img id="abinbev" src="img/logo.png">
+        <img id="budweiser" src="img/beer/Budweiser.png">
+        <img id="becks" src="img/beer/Becks.png">
+        <img id="corona" src="img/beer/Corona.png">
+        <img id="castle-large" src="img/beer/castle_largerr.png">
+        <img id="castlelite" src="img/beer/Castlelite.png">
+        <img id="hoegaarden" src="img/beer/Hoegaarden.png">
+        <img id="leffe" src="img/beer/leffe.png">
+        <img id="stella" src="img/beer/stella.png">
+        <img id="glass" src="img/glass/glass.png">
+        <img id="bud_glass" src="img/glass/budwiser.png">
+        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+        <img id="ice" src="img/ice.jpg">
+        <img id="party" src="img/party.jpg">
+          <video id="video-add" autoplay loop="true" src="img/Budweiser_video.mp4"></video>
+        <script id="link" type="text/html">
+          <a-entity class="link"
+            geometry="primitive: plane; height: 1; width: 1"
+            material="shader: flat; transparent:true; radius: 10;  src: ${thumb}"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+            event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+            event-set__4="_event: mouseleave; scale: 1 1 1"
+            set-image="on: click; target: #image-360; src: ${src}"
+            sound="on: click; src: #click-sound"></a-entity>
+        </script>
+      </a-assets>
+
+      <a-sky id="image-360" radius="10" src="#room"></a-sky>
+
+       <a-image src="#abinbev" width="2" height="1" rotation="0 181.32 180" position="0.42 4.46 7.57" scale="-4.08 -3.96 -0.4"></a-image>
+
+      <a-entity id="links" layout="type:line; margin:1.2" position="5.15 0.55 7.47" rotation="0 180 0" scale="1.2 1.2 1">
+        <a-entity  template="src: #link" data-src="#ice" data-thumb="#budweiser" scale="1 2 1"></a-entity>
+        <a-entity template="src: #link" data-src="#room" data-thumb="#becks" scale="1 2 1"></a-entity>
+        <a-entity template="src: #link" data-src="#party" data-thumb="#corona" look-at="[camera]" scale="1 2 1"></a-entity>
+        <a-entity  template="src: #link" data-src="#ice" data-thumb="#castle-large" scale="1 2 1"></a-entity>
+        <a-entity template="src: #link" data-src="#room" data-thumb="#castlelite" scale="1 2 1"></a-entity>
+        <a-entity template="src: #link" data-src="#party" data-thumb="#hoegaarden" scale="1 2 1"></a-entity>
+        <a-entity template="src: #link" data-src="#party" data-thumb="#leffe" scale="1 2 1"></a-entity>
+        <a-entity template="src: #link" data-src="#party" data-thumb="#stella" scale="1 2 1"></a-entity>
+      </a-entity>
+
+<a-video src="#video-add" width="16" height="9" position="-8 -1.35 -3.9" rotation="0 90 -0.15" material="color:#FFF;shader:flat;side:double;transparent:true;src:#video-add" geometry="primitive:plane;width:3;height:2"></a-video>
+
+      <a-entity camera look-controls>
+        <a-cursor id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__1="_event: mouseenter; color: springgreen"
+          event-set__2="_event: mouseleave; color: black"
+          raycaster="objects: .link"></a-cursor>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
